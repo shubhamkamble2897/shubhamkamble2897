@@ -1,0 +1,34 @@
+import os
+import shutil
+document = (".pdf", ".docx", ".txt")
+
+video = (".webm", ".MTS", ".M2TS", ".TS", ".mov",
+         ".mp4", ".m4p", ".m4v", ".mxf")
+
+image = (".jpg", ".jpeg", ".jfif", ".pjpeg", ".pjp", ".png",
+       ".gif", ".webp", ".svg", ".apng", ".avif")
+
+def is_document(file):
+    return os.path.splitext(file)[1] in document
+def is_video(file):
+    return os.path.splitext(file)[1] in video
+
+def is_image(file):
+    return os.path.splitext(file)[1] in image
+
+def is_screenshot(file):
+    name, ext = os.path.splitext(file)
+    return (ext in image) and "screenshot" in name.lower()
+
+os.chdir("D:\checkdata")    # mention your own directory path here
+
+for file in os.listdir():
+    if is_document(file):
+        shutil.move(file, r"D:\New folder\Document")   # here you can give path to add your respective data to store in your location
+    elif is_video(file):
+        shutil.move(file, r"D:\New folder\Video")      # here you can give path to add your respective data to store in your location
+    elif is_image(file):
+        shutil.move(file, r"D:\New folder\Image")      # here you can give path to add your respective data to store in your location
+
+    else:
+        shutil.move(file, r"D:\checkdata\Store")       # here you can give location for unneccesary data which is not belong to your mention extentions
